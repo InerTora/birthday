@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polaroid Birthday Backdrop with Video</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Custom CSS for floating balloons */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        .balloon {
+            animation: float 3s ease-in-out infinite;
+            font-size: 4rem; /* Increased size for bigger balloons */
+        }
+        .animation-delay-0 { animation-delay: 0s; }
+        .animation-delay-1 { animation-delay: 0.5s; }
+        .animation-delay-2 { animation-delay: 1s; }
+        .animation-delay-3 { animation-delay: 1.5s; }
+        .animation-delay-4 { animation-delay: 2s; }
+    </style>
+</head>
+<body class="bg-[url('bg.png')] min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Floating Balloons -->
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div class="balloon absolute top-1/4 left-1/4 animation-delay-0">🎈</div>
+        <div class="balloon absolute top-1/3 right-1/4 animation-delay-1">🎈</div>
+        <div class="balloon absolute top-1/2 left-1/2 animation-delay-2">🎈</div>
+        <div class="balloon absolute top-1/4 right-1/2 animation-delay-3">🎈</div>
+        <div class="balloon absolute top-2/3 left-1/4 animation-delay-4">🎈</div>
+    </div>
+
+    <!-- Polaroid Container -->
+    <div class="bg-white p-4 shadow-lg rounded-lg transform rotate-2 z-10">
+        <!-- Polaroid Video -->
+        <video id="celebrantVideo" autoplay loop class="w-full h-96 object-cover rounded-lg border-4 border-white shadow-md">
+            <source src="path_to_your_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Polaroid Caption -->
+        <div class="mt-4 text-center">
+            <h1 class="text-3xl font-bold text-pink-600">Happy Birthday!</h1>
+            <p class="text-xl text-gray-700 mt-2"><span id="celebrantName" class="font-semibold">[Engr. OMAR M. SAIKOL]</span>
+            <br>
+            <small> From: MIS Family</small>
+        </p>
+        </div>
+    </div>
+
+    <!-- JavaScript to Update Celebrant Data -->
+    <script>
+        // Sample data (replace with dynamic data if needed)
+        const celebrantData = {
+            name: "Engr. OMAR M. SAIKOL",
+            videoUrl: "3.mp4"
+        };
+
+        // Update the DOM with the celebrant's data
+        document.getElementById('celebrantName').textContent = celebrantData.name;
+        const videoElement = document.getElementById('celebrantVideo');
+        videoElement.src = celebrantData.videoUrl;
+
+        // Trigger confetti on page load
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    </script>
+</body>
+</html>
